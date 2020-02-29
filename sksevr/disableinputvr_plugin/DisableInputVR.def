@@ -1,0 +1,4 @@
+LIBRARY	"DisableInputVR_plugin"
+EXPORTS
+SKSEPlugin_Query
+SKSEPlugin_Load
