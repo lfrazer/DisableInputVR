@@ -62,6 +62,8 @@ namespace DisableInputVR {
 	//SkyrimVRTools input blocking Callback function. Inside we disable the input we want. In this case input that turns you left or right.
 	bool cbFunc(vr::TrackedDeviceIndex_t unControllerDeviceIndex, const vr::VRControllerState_t* pControllerState, uint32_t unControllerStateSize, vr::VRControllerState_t* pOutputControllerState)
 	{
+		const int JOYSTICK_AXIS = 0; // TODO: will be 3 for SKSEVR 2.00.11 in input actions mode
+
 		if (pControllerState)
 		{
 			if (!isGameStopped())
@@ -76,7 +78,16 @@ namespace DisableInputVR {
 						if (DisableTurning)
 						{
 							// joystick turning disabled = force to 0
-							pOutputControllerState->rAxis[0].x = 0.0f;
+							pOutputControllerState->rAxis[JOYSTICK_AXIS].x = 0.0f;
+						}
+
+						// disable joystick jump if set
+						if (DisableJoystickJump)
+						{
+							if (pControllerState->rAxis[JOYSTICK_AXIS].y > 0.0f)
+							{
+								pOutputControllerState->rAxis[JOYSTICK_AXIS].y = 0.0f;
+							}
 						}
 
 						if (pControllerState->ulButtonPressed != 0)

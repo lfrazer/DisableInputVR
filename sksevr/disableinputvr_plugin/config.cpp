@@ -14,6 +14,8 @@ namespace DisableInputVR
 
 	int DisableTurning = 1;
 
+	int DisableJoystickJump = 0;
+
 	int PreventActivateMisclick = 1;
 	int PreventActivateMisclickTimer = 1500;
 
@@ -58,7 +60,9 @@ namespace DisableInputVR
 						else if (variableName == "UseConfigValueInstead")
 							useConfigValue = std::stoi(variableValue);
 						else if (variableName == "DisableTurning")
-							DisableTurning = std::stoi(variableValue);		
+							DisableTurning = std::stoi(variableValue);
+						else if (variableName == "DisableJoystickJump")
+							DisableJoystickJump = std::stoi(variableValue);
 						else if (variableName == "PreventActivateMisclick")
 							PreventActivateMisclick = std::stoi(variableValue);		
 						else if (variableName == "PreventActivateMisclickTimer")

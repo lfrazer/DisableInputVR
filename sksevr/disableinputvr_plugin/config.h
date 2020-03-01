@@ -21,6 +21,7 @@ namespace DisableInputVR
 	extern bool logging;
 
 	extern int DisableTurning;
+	extern int DisableJoystickJump;
 
 	extern int PreventActivateMisclick;
 	extern int PreventActivateMisclickTimer;

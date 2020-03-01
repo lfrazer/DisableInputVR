@@ -50,7 +50,7 @@ extern "C" {
 		// populate info structure
 		info->infoVersion = PluginInfo::kInfoVersion;
 		info->name = "DisableInputVRPlugin";
-		info->version = 010000; // 1.0.0
+		info->version = 11000; // 1.1.0
 
 		// store plugin handle so we can identify ourselves later
 		g_pluginHandle = skse->GetPluginHandle();
