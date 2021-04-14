@@ -26,6 +26,8 @@ namespace DisableInputVR
 	extern int PreventActivateMisclick;
 	extern int PreventActivateMisclickTimer;
 
+	extern int PreventGripWhileSneaking;
+
 	extern std::vector<int> disabledButtonsLeftController;
 	extern std::vector<int> disabledButtonsRightController;
 

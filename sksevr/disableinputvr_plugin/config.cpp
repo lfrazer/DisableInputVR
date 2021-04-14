@@ -19,6 +19,8 @@ namespace DisableInputVR
 	int PreventActivateMisclick = 1;
 	int PreventActivateMisclickTimer = 1500;
 
+	int PreventGripWhileSneaking = 1;
+
 	std::vector<int> disabledButtonsLeftController;
 	std::vector<int> disabledButtonsRightController;
 

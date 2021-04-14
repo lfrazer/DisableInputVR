@@ -2,6 +2,9 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include "skse64/GameReferences.h"
+
+const int kGripButtonMask = 1 << 2;
 
 namespace DisableInputVR {
 	//Openvr system variable
@@ -72,6 +75,19 @@ namespace DisableInputVR {
 				{
 					vr::TrackedDeviceIndex_t rightController = hookManager->GetVRSystem()->GetTrackedDeviceIndexForControllerRole(rightControllerRole);
 					vr::TrackedDeviceIndex_t leftController = hookManager->GetVRSystem()->GetTrackedDeviceIndexForControllerRole(leftControllerRole);
+					auto player = DYNAMIC_CAST(LookupFormByID(0x14), TESForm, Actor);
+
+					auto DoBlockGripWhileSneaking = [&]()
+					{
+						if (PreventGripWhileSneaking)
+						{
+							// check for grip while sneaking
+							if ((pControllerState->ulButtonPressed & kGripButtonMask) && (player->actorState.flags04 & ActorState::kState_Sneaking))
+							{
+								pOutputControllerState->ulButtonPressed &= ~kGripButtonMask;
+							}
+						}
+					};
 
 					if (rightController == unControllerDeviceIndex)
 					{
@@ -119,6 +135,8 @@ namespace DisableInputVR {
 								if (pControllerState->ulButtonPressed & buttonMask)
 									pOutputControllerState->ulButtonPressed &= ~buttonMask;
 							}
+
+							DoBlockGripWhileSneaking();
 						}
 					}
 					else if (leftController == unControllerDeviceIndex)
@@ -130,6 +148,8 @@ namespace DisableInputVR {
 							if (pControllerState->ulButtonPressed & buttonMask)
 								pOutputControllerState->ulButtonPressed &= ~buttonMask;
 						}
+
+						DoBlockGripWhileSneaking();
 					}
 				}
 			}
